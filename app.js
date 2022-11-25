@@ -1,7 +1,7 @@
 // jshint esversion:6
 const express = require("express");
 const bodyParser = require("body-parser");
-const request = require("request");
+const axios = require("axios");
 const https = require("https");
 require("dotenv").config();
 
@@ -48,7 +48,7 @@ appl.post("/", function(req, res) {
     method: "POST",
     auth: "marcus1:" + MAPI_KEY
   };
-  const request = https.request(url, options, function(response) {
+  const axios = https.request(url, options, function(response) {
     response.on("data", function(data) {
     if (response.statusCode === 200){
       res.sendFile(__dirname + "/success.html");
@@ -65,8 +65,8 @@ appl.post("/", function(req, res) {
     res.redirect("/");
   });
 
-  request.write(jsonData);
-  request.end();
+  axios.write(jsonData);
+  axios.end();
 
 });
 
